@@ -1,0 +1,14 @@
+Day 4: Query Optimization Evidence
+
+QUERY:
+Find all bookings for a specific student (WHERE student_id = 1).
+
+BEFORE PLAN / CHANGE:
+We generated 50,000 rows. Without an index, PostgreSQL would perform a "Seq Scan" 
+(Sequential Scan), reading all 50,000 rows from the disk to find the matches.
+
+CHANGE:
+We created an index in V2__indexes.sql called `idx_booking_student` on the student_id column.
+
+AFTER PLAN / RESULT:
+PostgreSQL now uses an "Index Scan using idx_booking_student". Instead of scanning the whole table, it jumps directly to the rows for that student, reducing the execution time significantly. This proves that the index applied in the migration successfully optimizes lookups.

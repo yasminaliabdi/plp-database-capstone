@@ -1,0 +1,18 @@
+Day 3: NoSQL Layer Justification (Redis)
+
+Why Redis?
+We chose Redis for the caching layer of StudyRoom.
+
+What problem does it solve better than PostgreSQL?
+When students check for available study rooms, they refresh the page frequently. 
+If 1,000 students refresh the page at the same time, PostgreSQL would have to run 
+the same heavy query (joining Room, Building, and Booking tables) 1,000 times. 
+
+Redis solves this by storing the result in RAM (in-memory). The app can read the 
+available rooms from Redis in milliseconds, completely taking the load off PostgreSQL. 
+We can set the Redis cache to expire every 30 seconds, ensuring the data is never 
+too stale.
+
+Additionally, we use Redis to handle "temporary locks". If a student is checking 
+out a room, we can lock that room in Redis for 5 minutes. If they don't confirm, 
+the lock expires automatically, preventing double-booking without locking PostgreSQL rows.

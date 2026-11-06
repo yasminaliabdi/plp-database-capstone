@@ -1,0 +1,28 @@
+Project Name: StudyRoom
+Track: Database Systems Capstone
+Target Users: University Students, Library Staff (Admins)
+
+System Overview:
+StudyRoom is a multi-campus platform where university students can find and book 
+available study rooms in real-time.
+
+Core Entities:
+1. Campus (Represents a university location, e.g., Nairobi Campus, Mombasa Campus)
+2. Student (Users who book rooms)
+3. Admin (Library staff who manage rooms)
+4. Building (Library buildings on a campus)
+5. Room (Individual study rooms with capacities and amenities)
+6. Booking (A time slot reserved by a student)
+
+Key Functional Requirements:
+1. Multi-Campus Support: All data must be isolated by campus using Row-Level Security (RLS).
+2. Real-time Availability: Users can view available rooms. (To be cached in Redis).
+3. Booking Rules: A student can book a room up to 14 days in advance for a maximum of 2 hours.
+4. Check-in: Students check in via a QR code to prevent no-shows.
+5. Auditing: All changes to Rooms and Bookings must be tracked in an audit log.
+6. Security: Least-privilege roles (app_read, app_write) and hashed passwords.
+
+Out of Scope for this Sprint:
+- Payment processing
+- Mobile app development
+- Email/SMS notifications
